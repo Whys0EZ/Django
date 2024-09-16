@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  My Website
+{% endblock %}
+
+{% block styles %}
+  <style>
+    a {
+      text-decoration: none;
+    }
+    a:hover {
+      pointer-events: visible;
+      color: rgb(240, 2, 2);
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <div class="main">
+    <h1>My Website</h1>
+
+    <h3>Members</h3>
+
+    <p>
+      Check out all our <a href="{% url 'member' %}">members</a>
+    </p>
+  </div>
+{% endblock %}

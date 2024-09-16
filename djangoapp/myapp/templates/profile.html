@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Details about {{ profiles.username }}
+{% endblock %}
+
+{% block content %}
+
+    <h1>Profile: {{ profiles.username }}</h1>
+    <p>Email: {{ profiles.email }}</p>
+    <p>Joined: {{ profiles.date_joined }}</p>
+
+  <p>
+    Back to <a href="{% url 'member' %}">Members</a>
+  </p>
+{% endblock %}

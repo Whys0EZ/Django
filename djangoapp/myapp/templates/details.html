@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Details about {{ mymember.firstname }} {{ mymember.lastname }}
+{% endblock %}
+
+{% block content %}
+  <h1>{{ mymember.firstname }} {{ mymember.lastname }}</h1>
+
+  <p>Phone: {{ mymember.phone }}</p>
+  <p>Member since: {{ mymember.create_date }}</p>
+  <!-- tạo biến với with -->
+  {% with val='wellcome' a='my web' %}
+    <p>
+      Val Local: {{ val }} {{ a }} {% now 'Y-m-d' %}
+    </p>
+
+    {% if val > 1 %}
+      <h3>Hello</h3>
+    {% elif val == a %}
+      <h3>Wellcome!</h3>
+    {% elif val == 1 and a == "Friday" or val == 5 %}
+    {% else %}
+      <h3>Nothing</h3>
+    {% endif %}
+  {% endwith %}
+  <p>
+    Back to <a href="{% url 'member' %}">Members</a>
+  </p>
+{% endblock %}

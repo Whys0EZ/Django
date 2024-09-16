@@ -1,0 +1,6 @@
+asgiref
+Django
+whitenoise
+tzdata
+django-bootstrap-v5
+django-allauth

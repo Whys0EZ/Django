@@ -1,0 +1,229 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Đăng Nhập</title>
+    <script type="text/javascript" src=""></script>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f5f5f5;
+        margin: 0;
+      }
+      
+      .top-bar {
+        height: 60px;
+      
+        width: 100%;
+      }
+      
+      .title-bar {
+        font-size: 24px;
+      
+        width: 100%;
+        height: 25px;
+        font-weight: bold;
+        color: #999;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      
+      .separator {
+        width: 100%;
+        background-color: #b7ffb7;
+        font-size: 1px;
+        height: 7px;
+        margin-top: 20px;
+      }
+      
+      .login-container {
+        position: relative;
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 400px;
+        text-align: center;
+      }
+      
+      .login-container img {
+        width: 100%;
+        /* Đặt kích thước của logo */
+        height: auto;
+        margin-bottom: 20px;
+      }
+      
+      .login-container h2 {
+        margin: 0;
+        color: #333;
+      }
+      
+      .login-container label {
+        display: block;
+        margin-bottom: 8px;
+        text-align: left;
+        color: #666;
+      }
+      
+      .login-container input[type='text'],
+      .login-container input[type='password'] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+      div.check_box {
+        display: block;
+        margin-bottom: 8px;
+        text-align: left;
+      }
+      
+      .login-container input[type='submit'] {
+        width: 100%;
+        padding: 12px;
+        background-color: #007bff;
+        border: none;
+        color: #fff;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      
+      .login-container input[type='submit']:hover {
+        background-color: #0056b3;
+      }
+      
+      .login-container .forgot-password {
+        margin-top: 10px;
+        font-size: 14px;
+        color: #007bff;
+        text-decoration: none;
+      }
+      
+      .login-container .forgot-password:hover {
+        text-decoration: underline;
+      }
+      
+      .copyright {
+        position: absolute;
+        bottom: 10px;
+        left: 0;
+        right: 0;
+        font-size: 14px;
+        color: #999;
+        text-align: center;
+      }
+      
+      .top_bar {
+        position: absolute;
+        width: 100%;
+        /* text-align: center; */
+      
+        top: 0;
+        left: 0;
+        background-color: #fff;
+        border-bottom: 1px solid #ddd;
+        /* padding: 50px 0; */
+      }
+      .field-icon {
+        float: right;
+        margin-left: -25px;
+        margin-top: -25px;
+        position: relative;
+        z-index: 2;
+      }
+      .noti_mss ul{
+        list-style-type: none;
+        margin-top: 10px;
+        padding: 0;
+        color: #F00;
+      }
+    </style>
+  </head>
+
+  <body onLoad="form.username.focus();">
+    <div class="top_bar">
+      <div class="top-bar"></div>
+      <div class="title-bar">QA Online System</div>
+      <div class="separator"></div>
+    </div>
+
+    <div class="login-container">
+      <form  method="post" name="form">
+        <img src="{% static 'img\REG_Logo.png' %}" alt="Logo" /> <!-- Thay đổi đường dẫn đến logo của bạn -->
+        <h2>Đăng Nhập</h2>
+
+        <span style=" color:#F00;"><!-- noti login fail --></span>
+        <!-- <form action="form_login.php" method="post" name="form"> -->
+
+        {% csrf_token %}
+        <div class="noti_mss">
+        {% for key, value in form.errors.items %}
+          {{ value }}
+        {% endfor %}
+        </div>
+        <p>
+          <label>Tài khoản:</label>{{ form.username }}
+        </p>
+        <p>
+          <label>Mật khẩu:</label>{{ form.password }}
+        </p>
+        <input type="hidden" name="next" value="/" />
+        <input type="submit" value="Đăng nhập" />
+      </form>
+
+      <a href="forgot-password.php" target="_blank" class="forgot-password" id="forget">Quên mật khẩu?</a>
+    </div>
+
+    <div class="copyright">&copy; Copyright © 2024-present Crystal Regent Garment Factory Limited</div>
+
+    <script>
+      var x = document.getElementById('forget')
+      x.addEventListener('click', myFunction)
+      x.addEventListener('click', someOtherFunction)
+      // x.addEventListener("click", someOtherFunction1);
+      x.addEventListener('click', someOtherFunction2)
+      
+      function myFunction() {
+        alert('Tôi biết bạn cần gì :))')
+      }
+      
+      function someOtherFunction() {
+        alert('Bạn quên password phải không?')
+      }
+      function someOtherFunction1() {
+        alert('Tôi biết ngay bạn quên Password mà :P ')
+      }
+      function someOtherFunction2() {
+        alert('Xin lỗi nhé ! Tôi không thể giúp gì cho bạn! ')
+      }
+      
+      // show password
+      document.addEventListener('DOMContentLoaded', function () {
+        var togglePassword = document.getElementById('togglePassword')
+        var passwordInput = document.getElementById('password')
+      
+        togglePassword.addEventListener('click', function () {
+          // Toggle the type attribute of the password input
+          var type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password'
+          passwordInput.setAttribute('type', type)
+      
+          // Toggle the eye icon (optional, you can change the image or add a class)
+          this.src =
+            type === 'password'
+              ? "{% static 'img/eye.png' %}"
+              : // 'static/img/eyeslash.png'; // Example closed eye icon
+                "{% static 'img/Hidden.png' %}"
+        })
+      })
+    </script>
+  </body>
+</html>

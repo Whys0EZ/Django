@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}
+My App - List of all members
+{% endblock %}
+{% block styles %}
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td,
+    th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+
+    a {
+        text-decoration: none;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<p><a href="/">HOME</a></p>
+<h1>List Member</h1>
+<table>
+    <tr>
+        <td>Name</td>
+        <td>Phone</td>
+        <td>Create Date</td>
+        
+    </tr>
+    {% for x in mymembers %}
+    <tr>
+        <td><a href="details/{{ x.id }}"> {{x.firstname }} {{ x.lastname}} </a> </td>
+        <td>{{x.phone}}</td>
+        <td>{{x.create_date}}</td>
+        
+    </tr>
+
+    {% endfor %}
+</table>
+{% endblock %}
