@@ -11,6 +11,7 @@ urlpatterns = [
     path('member/', views.member, name='member'),
     path('member/details/<int:id>', views.details, name='details'),
     path('profile/<int:id>', views.profile, name='profile'),
+    path('search/', views.serach_info, name='search'),
     # path('member/details/<slug:slug>', views.details, name='details'),
 ]
 

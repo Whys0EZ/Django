@@ -13,6 +13,23 @@
       pointer-events: visible;
       color: rgb(240, 2, 2);
     }
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td,
+    th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+
   </style>
 {% endblock %}
 
@@ -25,5 +42,26 @@
     <p>
       Check out all our <a href="{% url 'member' %}">members</a>
     </p>
+
   </div>
+
+
+  <h1>List Member</h1>
+<table>
+    <tr>
+        <td>Name</td>
+        <td>Phone</td>
+        <td>Create Date</td>
+        
+    </tr>
+    {% for x in member %}
+    <tr>
+        <td><a href="{% url 'details' x.id  %}"> {{x.firstname }} {{ x.lastname}} </a> </td>
+        <td>{{x.phone}}</td>
+        <td>{{x.create_date}}</td>
+        
+    </tr>
+
+    {% endfor %}
+</table>
 {% endblock %}

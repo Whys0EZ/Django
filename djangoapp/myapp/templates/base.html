@@ -53,10 +53,11 @@
               </ul>
             </li>
           </ul>
-
-          <form class="d-flex">
-            <input class="form-control me-2" type="text" placeholder="Search ..." />
-            <button class="btn btn-primary" type="button">Search</button>
+          
+          <form class="d-flex" method="post" role="search" action="{% url 'search' %}">
+            {% csrf_token %}
+            <input class="form-control me-2" type="search" name="search_query" placeholder="Search ..." />
+            <button class="btn btn-primary" type="submit">Search</button>
           </form>
 
           <ul class="navbar-nav">

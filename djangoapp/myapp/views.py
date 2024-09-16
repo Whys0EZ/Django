@@ -8,19 +8,35 @@ from .forms import *
 from django.contrib.auth import authenticate,login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from .models import User_List
 # Create your views here.
 @login_required
 def main(request):
+    mymember = Member.objects.all().order_by('-firstname').values()
     template = loader.get_template('index.html')
     # return HttpResponse("Hello Word!")
     context  = {
-            'profiles':profile
+            'profiles':profile,
+            'member': mymember
         }
     return HttpResponse(template.render(context,request))
 
 
 def error(request, exception):
     return render(request, 'error.html', {'message': exception})
+
+def serach_info(request):
+    if request.method == 'POST':
+        # form = SearchForm(request.POST)
+        search_query = request.POST.get('search_query', '').strip()
+        if search_query:
+            results = User_List.objects.filter(username__icontains=search_query)
+        else:
+            results = User_List.objects.none()
+        return render(request, 'search.html', {'query':search_query, 'results':results})
+    else:
+        return render(request, 'search.html')
+
 
 def user_login(request):
     # form = LoginForm()

@@ -41,4 +41,10 @@ class LoginForm(forms.Form):
         return username
         # raise forms.ValidationError("Tài khoản chưa tồn tại.")
         
-    
+
+
+class SearchForm(forms.Form):
+    search = forms.CharField(max_length=150)
+    def search_info(self):
+        search = self.cleaned_data['search']
+        return search
